@@ -1,0 +1,15 @@
+ID, name, value
+000001,minFinalReportingDate,null
+000002,insuranceContract.policy,null
+000003,insuranceContract.clientName,null
+000004,insuranceContract.clientID,null
+000005,insuranceContract.insuranceName,null
+000006,InValNosLink,null
+000007,insuranceContract.ContractDetails,null
+000008,num,null
+000009,sum,null
+000010,contractNo,null
+000011,contractDescription,null
+000012,provisionalValue,null
+000013,reportingPeriodStart,null
+000014,reportingPeriodEnd,null
