@@ -1,0 +1,5 @@
+ID;createdAt;createdBy;lang;type;temp_ID;content
+20466921-7d57-4e76-b14c-11de;2021-04-27T00:00:00.000Z;max.mustermann@muster.com;German;Notification;20466921-7d57-4e76-b14c-e53fd97dcb11;####
+20466921-7d57-4e76-b14c-11tu;2021-04-27T00:00:00.000Z;max.mustermann@muster.com;Turkish;Notification;20466921-7d57-4e76-b14c-e53fd97dcb11;####
+20466921-7d57-4e76-b14c-12de;2021-04-27T00:00:00.000Z;max.mustermann@muster.com;German;Reminder;20466921-7d57-4e76-b14c-e53fd97dcb12;####
+20466921-7d57-4e76-b14c-12tu;2021-04-27T00:00:00.000Z;max.mustermann@muster.com;Turkish;Reminder;20466921-7d57-4e76-b14c-e53fd97dcb12;####
