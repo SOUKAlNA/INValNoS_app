@@ -1,4 +1,4 @@
-using { sap.ui.notification as my } from '../db/schema';
+using { sap.ui.notification as my } from '../db/schema2';
 
 @path: 'service/notification'
 service Notification {
@@ -6,4 +6,8 @@ service Notification {
     annotate Templates with @odata.draft.enabled;
   entity Translations as projection on my.Translations;
     annotate Translations with @odata.draft.enabled;
+  entity Contracts as projection on my.Contracts;
+    annotate Contracts with @odata.draft.enabled;
+  entity Components as projection on my.Components;
+    annotate Components with @odata.draft.enabled;
 }
