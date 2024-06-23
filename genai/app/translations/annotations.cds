@@ -17,8 +17,12 @@ annotate service.Translations with @(
             Target : '@UI.FieldGroup#Translate',
         },
     ],
-    UI.FieldGroup #Translate : {
-        $Type : 'UI.FieldGroupType',
-        Data : [],
-    }
 );
+/**
+annotate service.Translations with {
+    lang @Common.FieldControl : #ReadOnly
+};
+annotate service.Translations with {
+    type @Common.FieldControl : #ReadOnly
+};
+*/

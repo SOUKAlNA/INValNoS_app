@@ -8,6 +8,8 @@ using { managed } from '@sap/cds/common';
     contract    : Association to Contracts;
     subject     : String(50);
     content     : String(300);
+    translation : String;
+    inputlang   : String;
   }
 
   entity Templates : managed {

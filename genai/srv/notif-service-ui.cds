@@ -1,11 +1,13 @@
 using Notification from './notif-service';
 
 annotate Notification.Translations with {
-	ID          @title: 'Translation ID';
-	lang        @title: 'Language';
-	type        @title: 'Email Type';
-	subject     @title: 'Email Subject';
-	content     @title: 'Email Content';
+	ID          @title: 'Translation ID' @Common : {FieldControl : #ReadOnly};
+	lang        @title: 'Language' @Common : {FieldControl : #ReadOnly};
+	type        @title: 'Email Type' @Common : {FieldControl : #ReadOnly};
+	subject     @title: 'Email Subject' @UI : {MultiLineText};
+	content     @title: 'Email Content' @UI : {MultiLineText};
+	inputlang   @title : 'Translation Language'@UI : {MultiLineText, Placeholder : 'Enter Language for Translation',};
+	translation @title : 'Translation Content' @UI : {MultiLineText, Placeholder : 'Translate the Email',};
 }
 
 annotate Notification.Templates with {
@@ -43,20 +45,37 @@ annotate Notification.Translations with @(
 				Value: lang
 			}
 		],
-		Facets: [
-			{$Type: 'UI.ReferenceFacet', Label: 'Main', Target: '@UI.FieldGroup#Main'}
-		],
 		FieldGroup#Main: {
 			Data: [
-				{Value: type},
-				{Value: lang},
-				{Value: subject},
+				{
+					$Type: 'UI.DataField',
+					Value: type
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: lang
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: subject,
+				},
 			]
 		},
 		FieldGroup#Translate : {
 			$Type : 'UI.FieldGroupType',
 			Data: [
-				{Value: content}
+				{
+					$Type: 'UI.DataField',
+					Value: content,
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: inputlang,
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: translation,
+				},
 			]
 		},
 	},
@@ -72,7 +91,7 @@ annotate Notification.Contracts with {
 	insurer     @title : 'Name Insurer';
 	clientID    @title : 'ID Client';
 	client      @title : 'Name Client';
-	clientEmail @title : 'E-mail Client';
+	clientEmail @title : 'E-mail Client' @Communication.IsEmailAddress;
 	status      @title : 'Status insurance contract';
 	components  @title : 'Contract Component';
 }

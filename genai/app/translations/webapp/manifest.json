@@ -129,7 +129,19 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Translations"
+              "contextPath": "/Translations",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#Translate": {
+                  "fields": {
+                    "DataField::content": {
+                      "formatOptions": {
+                        "textLinesDisplay": 20,
+                        "textLinesEdit": 20
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
