@@ -1,5 +1,5 @@
-ID;lang;type
-20466921-DE;German;Notification
-20466921-TU;Turkish;Notification
-20466922-DE;German;Reminder
-20466922-TU;Turkish;Reminder
+ID,type,lang,contract_contractID,subject,content
+20466921-ENG,Notification,English,VH/01012019,Feedback on insurance policy required by {{minFinalReportingDate}},<p><strong>EN</strong></p><p>Subject: {{subject}}</p><p>Hello!</p><p>The premium of the insurance policy No. {{insuranceContract.policy}} for policy holder {{insuranceContract.clientName}} (ID in insurance system: {{insuranceContract.clientID}}) at insurance company {{insuranceContract.insuranceName}} was calculated on the basis of provisional data.<br>Therefore, a response is required at the end of the reporting period.</p><p>For this reporting please register online at {{{InValNosLink}}} with your eMail address as well as the following code.</p><p>The reporting can concern several contract components:</p>{{#each insuranceContract.ContractDetails}}<p>— Consecutive number: {{num}} / Total number: {{sum}} ----</p><p>{{contractNo}} - {{contractDescription}}<br>For this purpose, the insurer has sent us the provisional value from {{provisionalValue}} for the reporting value period from {{reportingPeriodStart}} to {{reportingPeriodEnd}}.</p>{{/each}}<p>Please complete the online questionnaire by {{minFinalReportingDate}}.</p><p>The online questionnaire allows you to quickly and easily answer the actual / billable reporting value, saves the environment and saves resources.</p><p>Thank you very much for your report!</p><p>Kind regards, Your reporting service team</p>
+20466922-ENG,Reminder,English, , ,
+20466923-ENG,REINSTATE_CONTRACT_DETAILS,English, , ,
+20466924-ENG,REINSTATE_INSURANCE_CONTRACT,English, , ,

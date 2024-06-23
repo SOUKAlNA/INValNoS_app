@@ -3,8 +3,11 @@ using { managed } from '@sap/cds/common';
 
   entity Translations : managed {
     key ID      : String;
-    type        : String(100);
+    type        : String(30);
     lang        : String(10);
+    contract    : Association to Contracts;
+    subject     : String(50);
+    content     : String(300);
   }
 
   entity Templates : managed {

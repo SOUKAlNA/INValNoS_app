@@ -4,6 +4,8 @@ annotate Notification.Translations with {
 	ID          @title: 'Translation ID';
 	lang        @title: 'Language';
 	type        @title: 'Email Type';
+	subject     @title: 'Email Subject';
+	content     @title: 'Email Content';
 }
 
 annotate Notification.Templates with {
@@ -47,9 +49,16 @@ annotate Notification.Translations with @(
 		FieldGroup#Main: {
 			Data: [
 				{Value: type},
-				{Value: lang}
+				{Value: lang},
+				{Value: subject},
 			]
-		}
+		},
+		FieldGroup#Translate : {
+			$Type : 'UI.FieldGroupType',
+			Data: [
+				{Value: content}
+			]
+		},
 	},
 ) {
 
