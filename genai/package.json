@@ -1,0 +1,28 @@
+{
+  "name": "genai",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/eslint-plugin-cds": "^3",
+    "@sap/ux-specification": "^1.120.12",
+    "eslint": "^9"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-translations": "cds watch --open translations/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-contracts": "cds watch --open contracts/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/translations",
+    "app/contracts",
+    "app/contracts"
+  ]
+}
