@@ -12,10 +12,10 @@ annotate Notification.Translations with @(
             },
 			Description : {/**subtitle */
 				$Type: 'UI.DataField',
-				Value: name
+				Value: type_code
 			}
 		},
-		SelectionFields: [name],
+		SelectionFields: [type_code],
 		LineItem: [//items shown in the list
 			{
 				$Type : 'UI.DataField',
@@ -23,12 +23,16 @@ annotate Notification.Translations with @(
 			},
 			{
 				$Type : 'UI.DataField',
-				Value: name
+				Value : type_code
 			},
 			{
 				$Type : 'UI.DataField',
-				Value: lang_code
-			}
+				Value : lang_code
+			},
+		    {
+		        $Type : 'UI.DataField',
+		        Value : translang_code
+		    }
 		],
 		Facets  : [
 			{
@@ -43,18 +47,15 @@ annotate Notification.Translations with @(
             Target : '@UI.FieldGroup#Translate',
 			},
 		],
-		DeleteHidden : true,
 		FieldGroup #Main: {
 			Data: [
 				{
 					$Type: 'UI.DataField',
-					Value: name,
-                    ![@Common.FieldControl] : #ReadOnly
+					Value: type_code,
 				},
 				{
 					$Type: 'UI.DataField',
 					Value: lang_code,
-                    ![@Common.FieldControl] : #ReadOnly
 				},
 				{
 					$Type: 'UI.DataField',
@@ -72,12 +73,19 @@ annotate Notification.Translations with @(
 			        $Type : 'UI.DataField',
 			        Value : translang_code,
 			    },
+<<<<<<< HEAD
 				{
 			        $Type : 'UI.DataFieldForAction',
 					Action : 'Notification.EntityContainer/Translate',
 					Label : '{i18n>Translate}',
 			    }
 
+=======
+			    {
+			        $Type : 'UI.DataField',
+			        Value : translation,
+			    },
+>>>>>>> origin/modifications
 				]
 		},
 	},
@@ -98,12 +106,8 @@ annotate service.Translations with {
                     {
                         $Type : 'Common.ValueListParameterInOut',
                         LocalDataProperty : lang_code,
-                        ValueListProperty : 'code'
-                    },
-                    {
-                        $Type : 'Common.ValueListParameterDisplayOnly',
                         ValueListProperty : 'name'
-                    }
+                    },
                 ]
             }
         }
@@ -123,8 +127,29 @@ annotate service.Translations with {
 					{
                         $Type : 'Common.ValueListParameterInOut',
                         LocalDataProperty : translang_code,
-                        ValueListProperty : 'name'
-                    }
+						ValueListProperty : 'name'
+                    },
+				]
+			}
+        }
+	);
+};
+
+annotate service.Translations with {
+    type @(
+		Common : {
+			Text: type.name,
+			TextArrangement : #TextOnly,
+			ValueListWithFixedValues : true,
+			ValueList : {
+				$Type : 'Common.ValueListType',
+				CollectionPath : 'EmailTypes',
+				Parameters : [
+					{
+                        $Type : 'Common.ValueListParameterInOut',
+                        LocalDataProperty : type_code,
+						ValueListProperty : 'name'
+                    },
 				]
 			}
         }
