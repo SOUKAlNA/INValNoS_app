@@ -1,21 +1,24 @@
 namespace sap.ui.notification;
-using { managed } from '@sap/cds/common';
+using { managed, sap.common.CodeList } from '@sap/cds/common';
+
+  entity LanguageTypes : CodeList {
+    key code    : String;
+  }
 
   entity Translations : managed {
-    key ID      : String;
-    type        : String(30);
-    lang        : String(10);
-    contract    : Association to Contracts;
-    subject     : String(50);
-    content     : String(300);
-    translation : String;
-    inputlang   : String;
+    key ID      : String @title : 'Email ID';
+    name        : String @title : 'Email Type';
+    lang        : Association to LanguageTypes @title : 'Email Template Language';
+    subject     : String @title : 'Email Template Subject' @UI.MultiLineText;
+    content     : String @title : 'Email Template Content' @UI.MultiLineText;
+    translang   : Association to LanguageTypes @title : 'Translation Langugae';
+    translation : String @title : 'Translation Email' @UI.MultiLineText;
   }
 
   entity Templates : managed {
-    key ID       : String;
-    name         : String(10);
-    description  : String;
+    key ID       : String @title : 'Template ID';
+    name         : String @title : 'Email Name';
+    description  : String @title : 'Description';
   }
 
   entity Contracts : managed {

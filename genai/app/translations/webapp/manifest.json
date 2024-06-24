@@ -130,14 +130,25 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Translations",
+              "openInEditMode": true,
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.FieldGroup#Translate": {
                   "fields": {
                     "DataField::content": {
                       "formatOptions": {
-                        "textLinesDisplay": 20,
-                        "textLinesEdit": 20
+                        "textLinesEdit": "15",
+                        "textMaxCharactersDisplay": "Infinity",
+                        "textExpandBehaviorDisplay": "InPlace"
                       }
+                    }
+                  },
+                  "actions": {
+                    "translate_func": {
+                      "press": "ns.translations.ext.translate_func.translate_func.translate_func",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Translate"
                     }
                   }
                 }

@@ -1,24 +1,11 @@
-/**sap.ui.define([
+sap.ui.define([
     "sap/m/MessageToast"
 ], function(MessageToast) {
     'use strict';
 
     return {
-        Translate: function() {
-            MessageToast.show("Custom...")
+        translate_func: function(oEvent) {
+            MessageToast.show("Custom handler invoked.");
         }
     };
-});
-*/
-
-sap.ui.require([
-    "./Controller"
-], function (Controller) {
-    "use strict";
-
-    return Controller.extend("ns.translations.Component", {
-        Translate: function () {
-            this.Controller.getComponentById("Translate");
-        }
-    });
 });
