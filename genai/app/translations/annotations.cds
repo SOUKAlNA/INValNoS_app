@@ -1,5 +1,6 @@
 using Notification as service from '../../srv/notif-service';
 
+
 annotate Notification.Translations with @(
 	UI: {
 		HeaderInfo: {
@@ -71,6 +72,12 @@ annotate Notification.Translations with @(
 			        $Type : 'UI.DataField',
 			        Value : translang_code,
 			    },
+				{
+			        $Type : 'UI.DataFieldForAction',
+					Action : 'Notification.EntityContainer/Translate',
+					Label : '{i18n>Translate}',
+			    }
+
 				]
 		},
 	},
@@ -123,3 +130,5 @@ annotate service.Translations with {
         }
 	);
 };
+
+/*annotate service.Translations */

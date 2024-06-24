@@ -6,6 +6,7 @@ service Notification {
     annotate Templates with @odata.draft.enabled;
   entity Translations as projection on my.Translations;
     annotate Translations with @odata.draft.enabled;
+    action Translate(translations: Translations:ID) returns String; 
   entity Contracts as projection on my.Contracts;
     annotate Contracts with @odata.draft.enabled;
   entity Components as projection on my.Components;

@@ -143,13 +143,7 @@
                     }
                   },
                   "actions": {
-                    "translate_func": {
-                      "press": "ns.translations.ext.translate_func.translate_func.translate_func",
-                      "visible": true,
-                      "enabled": true,
-                      "requiresSelection": false,
-                      "text": "Translate"
-                    }
+                  }
                   }
                 }
               }

@@ -11,7 +11,7 @@ using { managed, sap.common.CodeList } from '@sap/cds/common';
     lang        : Association to LanguageTypes @title : 'Email Template Language';
     subject     : String @title : 'Email Template Subject' @UI.MultiLineText;
     content     : String @title : 'Email Template Content' @UI.MultiLineText;
-    translang   : Association to LanguageTypes @title : 'Translation Langugae';
+    translang   : Association to LanguageTypes @title : 'Translation Language';
     translation : String @title : 'Translation Email' @UI.MultiLineText;
   }
 
