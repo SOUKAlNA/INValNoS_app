@@ -10,4 +10,5 @@ service Notification {
     annotate Contracts with @odata.draft.enabled;
   entity Components as projection on my.Components;
   entity LanguageTypes as projection on my.LanguageTypes;
+  entity EmailTypes as projection on my.EmailTypes;
 }

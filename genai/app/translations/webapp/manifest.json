@@ -104,6 +104,14 @@
             "settings": {
               "contextPath": "/Translations",
               "variantManagement": "Page",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "selectionMode": "Multi"
+                  }
+                }
+              },
               "navigation": {
                 "Translations": {
                   "detail": {
@@ -111,14 +119,7 @@
                   }
                 }
               },
-              "initialLoad": true,
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "ResponsiveTable"
-                  }
-                }
-              }
+              "initialLoad": "Enabled"
             }
           }
         },
@@ -135,6 +136,13 @@
                 "@com.sap.vocabularies.UI.v1.FieldGroup#Translate": {
                   "fields": {
                     "DataField::content": {
+                      "formatOptions": {
+                        "textLinesEdit": "15",
+                        "textMaxCharactersDisplay": "Infinity",
+                        "textExpandBehaviorDisplay": "InPlace"
+                      }
+                    },
+                    "DataField::translation": {
                       "formatOptions": {
                         "textLinesEdit": "15",
                         "textMaxCharactersDisplay": "Infinity",
