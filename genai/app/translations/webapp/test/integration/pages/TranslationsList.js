@@ -1,17 +1,19 @@
+"use strict";
+
 sap.ui.define(['sap/fe/test/ListReport'], function(ListReport) {
     'use strict';
 
-    var CustomPageDefinitions = {
-        actions: {},
-        assertions: {}
-    };
-
-    return new ListReport(
+    const TranslationsList = new ListReport(
         {
             appId: 'ns.translations',
             componentId: 'TranslationsList',
-            contextPath: '/Translations'
+            entitySet: "Translations",
+            contextPath: ""
         },
-        CustomPageDefinitions
     );
+    var __exports = {
+        __esModule: true
+    };
+    __exports.TranslationsList = TranslationsList;
+    return __exports;
 });

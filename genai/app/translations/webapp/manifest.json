@@ -43,12 +43,13 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.124.1",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
+        "sap.ui.layout": {},
         "sap.ushell": {},
         "sap.fe.templates": {}
       }
@@ -104,8 +105,20 @@
             "settings": {
               "contextPath": "/Translations",
               "variantManagement": "Page",
+              "initialLoad": "Enabled",
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "DataField::ID": {
+                      "width": "15rem"
+                    },
+                    "DataField::type_code": {
+                      "width": "15rem"
+                    },
+                    "DataField::lang_code": {
+                      "width": "15rem"
+                    }
+                  },
                   "tableSettings": {
                     "type": "ResponsiveTable",
                     "selectionMode": "Multi"
@@ -118,8 +131,7 @@
                     "route": "TranslationsObjectPage"
                   }
                 }
-              },
-              "initialLoad": "Enabled"
+              }
             }
           }
         },
@@ -132,20 +144,27 @@
               "editableHeaderContent": false,
               "contextPath": "/Translations",
               "openInEditMode": true,
+              "content": {
+                "body": {
+                  "sections": {
+                    "ContentEditor": {
+                      "template": "ns.translations.ext.fragment.ContentEditor",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "TranslateInformation"
+                      },
+                      "title": "Translation Content",
+                      "type": "XMLFragement"
+                    }
+                  }
+                }
+              },
               "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.FieldGroup#Translate": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#TranslateInformation": {
                   "fields": {
-                    "DataField::content": {
+                    "DataField::template": {
                       "formatOptions": {
-                        "textLinesEdit": "15",
-                        "textMaxCharactersDisplay": "Infinity",
-                        "textExpandBehaviorDisplay": "InPlace"
-                      }
-                    },
-                    "DataField::translation": {
-                      "formatOptions": {
-                        "textLinesEdit": "15",
-                        "textMaxCharactersDisplay": "Infinity",
+                        "textLinesEdit": "12",
                         "textExpandBehaviorDisplay": "InPlace"
                       }
                     }
@@ -162,6 +181,15 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ObjectPage.ObjectPageController": {
+            "controllerName": "ns.translations.ext.controller.ContentEditor"
           }
         }
       }

@@ -3,10 +3,11 @@ sap.ui.define(
     function (Component) {
         "use strict";
 
-        return Component.extend("ns.translations.Component", {
+        var __exports = Component.extend("ns.translations.Component", {
             metadata: {
                 manifest: "json"
             }
         });
+        return __exports;
     }
 );

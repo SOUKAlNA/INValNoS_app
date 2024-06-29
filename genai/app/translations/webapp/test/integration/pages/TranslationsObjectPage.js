@@ -1,17 +1,19 @@
+"use strict";
+
 sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
     'use strict';
 
-    var CustomPageDefinitions = {
-        actions: {},
-        assertions: {}
-    };
-
-    return new ObjectPage(
+    const TranslationsObjectPage = new ObjectPage(
         {
             appId: 'ns.translations',
             componentId: 'TranslationsObjectPage',
-            contextPath: '/Translations'
+            entitySet: "Translations",
+            contextPath: ""
         },
-        CustomPageDefinitions
     );
+    var __exports = {
+        __esModule: true
+    };
+    __exports.TranslationsObjectPage = TranslationsObjectPage;
+    return __exports;
 });

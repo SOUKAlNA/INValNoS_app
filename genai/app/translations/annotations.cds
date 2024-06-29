@@ -1,6 +1,6 @@
 using Notification as service from '../../srv/notif-service';
 
-annotate Notification.Translations with @(
+annotate service.Translations with @(
 	UI: {
 		HeaderInfo: {
 			TypeName: 'Translation',
@@ -9,12 +9,8 @@ annotate Notification.Translations with @(
                 $Type : 'UI.DataField',
                 Value : ID
             },
-			Description : {/**subtitle */
-				$Type: 'UI.DataField',
-				Value: type_code
-			}
 		},
-		SelectionFields: [type_code],
+		SelectionFields: [type_code, translang_code],
 		LineItem: [//items shown in the list
 			{
 				$Type : 'UI.DataField',
@@ -33,20 +29,8 @@ annotate Notification.Translations with @(
 		        Value : translang_code
 		    }
 		],
-		Facets  : [
-			{
-            $Type : 'UI.ReferenceFacet',
-            Label : 'Detail',
-            Target : '@UI.FieldGroup#Main',
-			},
-			{
-            $Type : 'UI.ReferenceFacet',
-            Label : 'Translate',
-            ID : 'Translate',
-            Target : '@UI.FieldGroup#Translate',
-			},
-		],
-		FieldGroup #Main: {
+		FieldGroup #TemplateInformation: {
+			$Type: 'UI.FieldGroupType',
 			Data: [
 				{
 					$Type: 'UI.DataField',
@@ -58,30 +42,43 @@ annotate Notification.Translations with @(
 				},
 				{
 					$Type: 'UI.DataField',
+					Value: translang_code,
+				},
+			]
+		},
+		FieldGroup #TranslateInformation : {
+			$Type : 'UI.FieldGroupType',
+			Data : [
+				{
+					$Type: 'UI.DataField',
 					Value: subject,
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: template,
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: content,
 				}
 			]
 		},
-		FieldGroup #Translate : {
-			Data: [
-			    {
-			        $Type : 'UI.DataField',
-			        Value : content,
-			    },
-			    {
-			        $Type : 'UI.DataField',
-			        Value : translang_code,
-			    },
-			    {
-			        $Type : 'UI.DataField',
-			        Value : translation,
-			    },
-				]
-		},
+		Facets  : [
+			{
+            $Type : 'UI.ReferenceFacet',
+			ID : 'TemplateInformation',
+            Label : 'General Information',
+            Target : '@UI.FieldGroup#TemplateInformation',
+			},
+			{
+            $Type : 'UI.ReferenceFacet',
+			ID : 'TranslateInformation',
+            Label : 'Translate Email',
+            Target : '@UI.FieldGroup#TranslateInformation',
+			}
+		],
 	},
-) {
-
-};
+);
 
 
 annotate service.Translations with {

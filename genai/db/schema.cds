@@ -12,11 +12,11 @@ using { managed, sap.common.CodeList } from '@sap/cds/common';
   entity Translations : managed {
     key ID      : String @title : 'Email ID';
     type        : Association to EmailTypes @title : 'Email Type' @readonly;
-    lang        : Association to LanguageTypes @title : 'Email Template Language' @readonly;
-    subject     : String @title : 'Email Template Subject' @UI.MultiLineText;
-    content     : String @title : 'Email Template Content' @UI.MultiLineText;
+    lang        : Association to LanguageTypes @title : 'Template Language' @readonly;
+    subject     : String @title : 'Template Subject' @UI.MultiLineText;
+    template    : String @title : 'Template Content' @UI.MultiLineText;
     translang   : Association to LanguageTypes @title : 'Translation Langugae';
-    translation : String @title : 'Translation Email' @UI.MultiLineText;
+    content     : String @title : 'Translation Content' @UI.MultiLineText;
   }
 
   entity Templates : managed {
