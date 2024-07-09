@@ -1,20 +1,20 @@
 sap.ui.define(["sap/ui/core/Element", "sap/ui/core/mvc/ControllerExtension", "sap/ui/richtexteditor/RichTextEditor"], function (Element, ControllerExtension, RichTextEditor) {
 	"use strict";
   
-	const CONTENT_FIELD_ID = "ns.translations::TranslationsObjectPage--fe::FormContainer::TranslateInformation::FormElement::DataField::content::Field-edit";
-	const FORM_FIELD_ID = "ns.translations::TranslationsObjectPage--fe::FormContainer::TranslateInformation::FormElement::DataField::content";
+	const TEMPLATE_CONTENT_FIELD_ID = "tp.templates::TemplatesObjectPage--fe::FormContainer::General::FormElement::DataField::content::Field-edit";
+	const TEMPLATE_FORM_FIELD_ID = "tp.templates::TemplatesObjectPage--fe::FormContainer::General::FormElement::DataField::content";
 	
 	let oRichTextEditor;
 	let oContentFormElement;
 	
 	/**
-	 * @namespace ns.translations.ext
+	 * @namespace tp.templates.ext
 	 * @controller
 	 */
-	const ContentEditor = ControllerExtension.extend("ns.translations.ext.ContentEditor", {
+	const TemplateEditor = ControllerExtension.extend("tp.templates.ext.TemplateEditor", {
 	  overrides: {
 		onInit() {
-		  oContentFormElement = Element.getElementById(FORM_FIELD_ID);
+		  oContentFormElement = Element.getElementById(TEMPLATE_FORM_FIELD_ID);
 		  oRichTextEditor = new RichTextEditor("myRTE", {
 			editorType: "TinyMCE",
 			value: " ",
@@ -39,16 +39,16 @@ sap.ui.define(["sap/ui/core/Element", "sap/ui/core/mvc/ControllerExtension", "sa
 			change: oEvent => {
 			  if (!(oEvent.getSource().getBindingContext()?.getObject()).IsActiveEntity) {
 				const content = oEvent.getSource().getValue();
-				Element.getElementById(CONTENT_FIELD_ID).setValue(content);
+				Element.getElementById(TEMPLATE_CONTENT_FIELD_ID).setValue(content);
 			  }
 			}
 		  });
 		},
 		onPageReady() {
 		  const oExtentionAPI = this.base.getExtensionAPI();
-		  const oRTE = oExtentionAPI.byId("fe::CustomSubSection::ContentEditor--idVerticalLayout");
+		  const oRTE = oExtentionAPI.byId("fe::CustomSubSection::TemplateEditor--idVerticalLayout");
 		  oContentFormElement.setVisible(true);
-		  const value = Element.getElementById(CONTENT_FIELD_ID)?.getValue();
+		  const value = Element.getElementById(TEMPLATE_CONTENT_FIELD_ID)?.getValue();
 		  oContentFormElement.setVisible(false);
 		  oRichTextEditor.setValue(value);
 		  oRTE.addContent(oRichTextEditor);
@@ -59,21 +59,21 @@ sap.ui.define(["sap/ui/core/Element", "sap/ui/core/mvc/ControllerExtension", "sa
 		editFlow: {
 		  onBeforeEdit() {
 			oContentFormElement.setVisible(true);
-			const value = Element.getElementById(CONTENT_FIELD_ID).getValue();
+			const value = Element.getElementById(TEMPLATE_CONTENT_FIELD_ID).getValue();
 			oContentFormElement.setVisible(false);
 			oRichTextEditor.setValue(value);
 			oRichTextEditor.setEditable(true);
 		  },
 		  onAfterDiscard() {
 			oContentFormElement.setVisible(true);
-			const value = Element.getElementById(CONTENT_FIELD_ID).getValue();
+			const value = Element.getElementById(TEMPLATE_CONTENT_FIELD_ID).getValue();
 			oContentFormElement.setVisible(false);
 			oRichTextEditor.setValue(value);
 			oRichTextEditor.setEditable(false);
 		  },
 		  onBeforeSave() {
 			oContentFormElement.setVisible(true);
-			Element.getElementById(CONTENT_FIELD_ID).setValue(oRichTextEditor.getValue());
+			Element.getElementById(TEMPLATE_CONTENT_FIELD_ID).setValue(oRichTextEditor.getValue());
 			oContentFormElement.setVisible(false);
 			oRichTextEditor.setEditable(false);
 		  }
@@ -81,5 +81,5 @@ sap.ui.define(["sap/ui/core/Element", "sap/ui/core/mvc/ControllerExtension", "sa
 	  }
 	});
 
-	return ContentEditor;
+	return TemplateEditor;
   });

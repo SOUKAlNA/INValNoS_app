@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "ns.translations",
+    "id": "tp.templates",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.13.6",
-      "toolsId": "e0394362-a2d8-4912-a295-a06338dbbee0"
+      "toolsId": "9863fa59-1760-4a88-892f-e44f6e9b095f"
     },
     "dataSources": {
       "mainService": {
@@ -43,13 +43,12 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": false,
+    "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.124.1",
+      "minUI5Version": "1.125.1",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.ui.layout": {},
         "sap.ushell": {},
         "sap.fe.templates": {}
       }
@@ -62,7 +61,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "ns.translations.i18n.i18n"
+          "bundleName": "tp.templates.i18n.i18n"
         }
       },
       "": {
@@ -87,92 +86,79 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "TranslationsList",
-          "target": "TranslationsList"
+          "name": "TemplatesList",
+          "target": "TemplatesList"
         },
         {
-          "pattern": "Translations({key}):?query:",
-          "name": "TranslationsObjectPage",
-          "target": "TranslationsObjectPage"
+          "pattern": "Templates({key}):?query:",
+          "name": "TemplatesObjectPage",
+          "target": "TemplatesObjectPage"
         }
       ],
       "targets": {
-        "TranslationsList": {
+        "TemplatesList": {
           "type": "Component",
-          "id": "TranslationsList",
+          "id": "TemplatesList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/Translations",
+              "contextPath": "/Templates",
               "variantManagement": "Page",
               "initialLoad": "Enabled",
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "columns": {
-                    "DataField::ID": {
-                      "width": "20rem"
-                    }
-                  },
-                  "tableSettings": {
-                    "type": "ResponsiveTable",
-                    "selectionMode": "Multi"
+              "navigation": {
+                "Templates": {
+                  "detail": {
+                    "route": "TemplatesObjectPage"
                   }
                 }
               },
-              "navigation": {
-                "Translations": {
-                  "detail": {
-                    "route": "TranslationsObjectPage"
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "selectionMode": "Multi"
                   }
                 }
               }
             }
           }
         },
-        "TranslationsObjectPage": {
+        "TemplatesObjectPage": {
           "type": "Component",
-          "id": "TranslationsObjectPage",
+          "id": "TemplatesObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Translations",
+              "contextPath": "/Templates",
               "content": {
                 "body": {
                   "sections": {
-                    "ContentEditor": {
-                      "template": "ns.translations.ext.fragment.ContentEditor",
+                    "TemplateEditor": {
+                      "template": "tp.templates.ext.fragment.TemplateEditor",
                       "position": {
                         "placement": "After",
-                        "anchor": "TranslateInformation"
+                        "anchor": "General"
                       },
-                      "title": "Translation Content",
+                      "title": "Template Content",
                       "type": "XMLFragement"
                     }
                   }
                 }
               },
               "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.FieldGroup#TranslateInformation": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#General": {
                   "fields": {
-                    "DataField::content": {
+                    "DataField::subject": {
                       "formatOptions": {
-                        "textLinesEdit": "12",
+                        "textLinesEdit": "3",
                         "textExpandBehaviorDisplay": "InPlace"
                       }
                     }
-                  },
-                  "actions": {
-                    "translate_func": {
-                      "press": "ns.translations.ext.translate_func.translate_func.translate_func",
-                      "visible": true,
-                      "enabled": true,
-                      "requiresSelection": false,
-                      "text": "Translate"
-                    }
                   }
                 }
-              }
+              },
+              "sectionLayout": "Page"
             }
           }
         }
@@ -182,7 +168,7 @@
       "extensions": {
         "sap.ui.controllerExtensions": {
           "sap.fe.templates.ObjectPage.ObjectPageController": {
-            "controllerName": "ns.translations.ext.controller.ContentEditor"
+            "controllerName": "tp.templates.ext.controller.TemplateEditor"
           }
         }
       }

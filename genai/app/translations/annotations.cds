@@ -5,12 +5,10 @@ annotate service.Translations with @(
 		HeaderInfo: {
 			TypeName: 'Translation',
 			TypeNamePlural: 'Translations',
-			Title          : {
-                $Type : 'UI.DataField',
-                Value : ID
-            },
+			Title         : {Value : template.name},
+			Description   : {Value : ID}
 		},
-		SelectionFields: [type_code, translang_code],
+		SelectionFields: [template.name, translang],
 		LineItem: [//items shown in the list
 			{
 				$Type : 'UI.DataField',
@@ -18,44 +16,68 @@ annotate service.Translations with @(
 			},
 			{
 				$Type : 'UI.DataField',
-				Value : type_code
+				Label : 'Email Type',
+				Value : template_ID,
 			},
 			{
 				$Type : 'UI.DataField',
-				Value : lang_code
+				Value : template.lang_code
 			},
 		    {
 		        $Type : 'UI.DataField',
-		        Value : translang_code
+		        Value : translang,
+				![@UI.Importance]: #High
 		    }
 		],
-		FieldGroup #TemplateInformation: {
-			$Type: 'UI.FieldGroupType',
-			Data: [
+		FieldGroup #TemplateInformation : {
+			$Type : 'UI.FieldGroupType',
+			Data : [
 				{
 					$Type: 'UI.DataField',
-					Value: type_code,
+					Value: template.lang_code,
+					![@Common.FieldControl] : #ReadOnly /**all templates are in English */
 				},
 				{
 					$Type: 'UI.DataField',
-					Value: lang_code,
+					Value: template.subject,
 				},
 				{
 					$Type: 'UI.DataField',
-					Value: translang_code,
+					Value: template.content,
 				},
+				{
+			        $Type : 'UI.DataFieldForAction',
+			        Label : 'Translator',
+					Action : 'Notification.translator',
+			    },
 			]
 		},
+		Facets  : [
+			{
+				$Type : 'UI.ReferenceFacet',
+				Label : 'Template Information',
+				ID : 'TemplateInformation',
+				Target : '@UI.FieldGroup#TemplateInformation',
+			},
+			{
+            	$Type : 'UI.ReferenceFacet',
+				Label : 'Translate Email',
+				ID : 'TranslateInformation',
+            	Target : '@UI.FieldGroup#TranslateInformation',
+			}
+		],
+	}
+);
+
+annotate service.Translations with @(
+	odata.draft.enabled : true,
+	UI: {
 		FieldGroup #TranslateInformation : {
 			$Type : 'UI.FieldGroupType',
 			Data : [
 				{
 					$Type: 'UI.DataField',
-					Value: subject,
-				},
-				{
-					$Type: 'UI.DataField',
-					Value: template,
+					Value: translang,
 				},
 				{
 					$Type: 'UI.DataField',
@@ -63,47 +85,12 @@ annotate service.Translations with @(
 				}
 			]
 		},
-		Facets  : [
-			{
-            $Type : 'UI.ReferenceFacet',
-			ID : 'TemplateInformation',
-            Label : 'General Information',
-            Target : '@UI.FieldGroup#TemplateInformation',
-			},
-			{
-            $Type : 'UI.ReferenceFacet',
-			ID : 'TranslateInformation',
-            Label : 'Translate Email',
-            Target : '@UI.FieldGroup#TranslateInformation',
-			}
-		],
 	},
 );
 
-
 annotate service.Translations with {
-    lang @(
-        Common : {
-            Text: lang.name,
-            TextArrangement : #TextOnly,
-            ValueListWithFixedValues : true,
-            ValueList : {
-                $Type : 'Common.ValueListType',
-                CollectionPath : 'LanguageTypes',
-                Parameters : [
-                    {
-                        $Type : 'Common.ValueListParameterInOut',
-                        LocalDataProperty : lang_code,
-                        ValueListProperty : 'name'
-                    },
-                ]
-            }
-        }
-    );
-};
-
-annotate service.Translations with {
-    translang @(
+    /**
+	translang @(
 		Common : {
 			Text: translang.name,
 			TextArrangement : #TextOnly,
@@ -115,31 +102,37 @@ annotate service.Translations with {
 					{
                         $Type : 'Common.ValueListParameterInOut',
                         LocalDataProperty : translang_code,
-						ValueListProperty : 'name'
+						ValueListProperty : 'code'
                     },
+					{
+						$Type : 'Common.ValueListParameterDisplayOnly',
+						ValueListProperty : 'name'
+					},
 				]
 			}
         }
-	);
-};
+	);*/
 
-annotate service.Translations with {
-    type @(
+	template @(
 		Common : {
-			Text: type.name,
+			Text: template.name,
 			TextArrangement : #TextOnly,
-			ValueListWithFixedValues : true,
 			ValueList : {
 				$Type : 'Common.ValueListType',
-				CollectionPath : 'EmailTypes',
+				CollectionPath : 'Templates',
+				SearchSupported : true,
 				Parameters : [
 					{
-                        $Type : 'Common.ValueListParameterInOut',
-                        LocalDataProperty : type_code,
+						$Type : 'Common.ValueListParameterInOut',
+						LocalDataProperty : template_ID,
+						ValueListProperty : 'ID'
+					},
+					{
+						$Type : 'Common.ValueListParameterDisplayOnly',
 						ValueListProperty : 'name'
-                    },
+					},
 				]
-			}
-        }
-	);
+			},
+		}
+	)
 };

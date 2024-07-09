@@ -1,14 +1,22 @@
-using { sap.ui.notification as my } from '../db/schema';
+using { sap.ui.notification as db } from '../db/schema';
 
 @path: 'service/notification'
 service Notification {
-  entity Templates as projection on my.Templates;
-    annotate Templates with @odata.draft.enabled;
-  entity Translations as projection on my.Translations;
-    annotate Translations with @odata.draft.enabled;
-  entity Contracts as projection on my.Contracts;
-    annotate Contracts with @odata.draft.enabled;
-  entity Components as projection on my.Components;
-  entity LanguageTypes as projection on my.LanguageTypes;
-  entity EmailTypes as projection on my.EmailTypes;
+  @odata.draft.enabled
+  entity Contracts as projection on db.Contracts;
+	entity Components as projection on db.Components;
+  entity Translations as projection on db.Translations
+  actions{
+    @cds.odata.bindingparameter.name : '_it'
+    action translator(
+                      @(UI.ParameterDefaultValue: _it.ID )
+                      ID: String,
+                      @(UI.ParameterDefaultValue: _it.translang) 
+                      translang : String,
+                      @(UI.ParameterDefaultValue: _it.template_ID) 
+                      template_ID : String,
+                    );
+  };
+  entity Templates as projection on db.Templates;
+  entity LanguageTypes as projection on db.LanguageTypes;
 }
