@@ -104,6 +104,14 @@ annotate service.Translations with {
 
 annotate service.Translations with {
     translang @(
+        Common.ValueList.entity            : 'Notification.LanguageTypes',
+        Common.ValueList.value             : 'code',
+        Common.ValueList.text              : 'Description'
+    );
+}
+
+annotate service.Translations with {
+    translang @(
 		Common : {
 			Text: translang.name,
 			TextArrangement : #TextOnly,
