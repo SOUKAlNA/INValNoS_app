@@ -60,7 +60,12 @@ annotate service.Translations with @(
 				{
 					$Type: 'UI.DataField',
 					Value: content,
-				}
+				},
+				{
+			        $Type : 'UI.DataFieldForAction',
+			        Label : 'Translator',
+					Action : 'Notification.translator',
+			    	},
 			]
 		},
 		Facets  : [
