@@ -64,7 +64,7 @@ annotate service.Translations with @(
 				{
 			        $Type : 'UI.DataFieldForAction',
 			        Label : 'Translator',
-					Action : 'Notification.translator',
+				Action : 'Notification.translator',
 			    	},
 			]
 		},
