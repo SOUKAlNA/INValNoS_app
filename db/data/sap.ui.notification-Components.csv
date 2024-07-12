@@ -1,0 +1,3 @@
+component,contract_contractID,descr,valueType,provisional,final,reportStart,reportEnd,finalReport
+VH/01012019-00001,VH/01012019,Umsatz BMW Dingolfing,Revenue,500000,51000,2024-06-01T01:00:00.993Z,2024-08-01T01:00:00.993Z,2024-08-03T01:00:00.993Z
+VH/01012019-00002,VH/01012019,Umsatz BMW Dingolfing,Revenue,500000,0,2024-08-01T01:00:00.993Z,2024-10-01T01:00:00.993Z,2024-10-03T01:00:00.993Z

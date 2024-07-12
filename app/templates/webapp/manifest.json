@@ -1,0 +1,181 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "tp.templates",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.13.6",
+      "toolsId": "9863fa59-1760-4a88-892f-e44f6e9b095f"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/service/notification/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.125.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "tp.templates.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "TemplatesList",
+          "target": "TemplatesList"
+        },
+        {
+          "pattern": "Templates({key}):?query:",
+          "name": "TemplatesObjectPage",
+          "target": "TemplatesObjectPage"
+        }
+      ],
+      "targets": {
+        "TemplatesList": {
+          "type": "Component",
+          "id": "TemplatesList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Templates",
+              "variantManagement": "Page",
+              "initialLoad": "Enabled",
+              "navigation": {
+                "Templates": {
+                  "detail": {
+                    "route": "TemplatesObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "selectionMode": "Multi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "TemplatesObjectPage": {
+          "type": "Component",
+          "id": "TemplatesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Templates",
+              "content": {
+                "body": {
+                  "sections": {
+                    "TemplateEditor": {
+                      "template": "tp.templates.ext.fragment.TemplateEditor",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "General"
+                      },
+                      "title": "Template Content",
+                      "type": "XMLFragement"
+                    }
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#General": {
+                  "fields": {
+                    "DataField::subject": {
+                      "formatOptions": {
+                        "textLinesEdit": "3",
+                        "textExpandBehaviorDisplay": "InPlace"
+                      }
+                    }
+                  }
+                }
+              },
+              "sectionLayout": "Page"
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ObjectPage.ObjectPageController": {
+            "controllerName": "tp.templates.ext.controller.TemplateEditor"
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
