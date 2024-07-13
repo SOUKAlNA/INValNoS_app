@@ -2,3 +2,13 @@ specVersion: "2.5"
 metadata:
   name: con.contracts
 type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+    - name: ui5-tooling-transpile-middleware
+      afterMiddleware: compression
+      configuration:
+        debug: true
+        excludePatterns:
+          - /Component-preload.js
