@@ -7,19 +7,39 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^7",
-    "express": "^4"
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
     "@sap/eslint-plugin-cds": "^3",
     "@sap/ux-specification": "^1.120.14",
     "eslint": "^9"
   },
   "scripts": {
     "start": "cds-serve",
+    "build": "npx -p mbt mbt build",
+    "build:cf": "cds build --production",
+    "deploy": "cf deploy mta_archives/genai_1.0.0.mtar --retries 1",
     "watch-translations": "cds watch --open translations/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-contracts": "cds watch --open contracts/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-templates": "cds watch --open templates/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "auth": {
+        "[development]": {
+          "kind": "dummy"
+        },
+        "[production]": {
+          "kind": "xsuaa"
+        }
+      },
+      "[production]": {
+        "db": "hana"
+      }
+    }
   },
   "sapux": [
     "app/translations",
