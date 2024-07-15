@@ -1,0 +1,163 @@
+_schema-version: '3.1'
+ID: genai
+version: 1.0.0
+description: "Generative AI translator App."
+parameters:
+  enable-parallel-deployments: true
+  deploy_mode: html5-repo
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm run build:cf
+modules:
+  - name: genai-srv
+    type: nodejs
+    path: .
+    parameters:
+      buildpack: nodejs_buildpack
+      readiness-health-check-type: http
+      readiness-health-check-http-endpoint: /health
+    build-parameters:
+      build-result: gen/srv
+    provides:
+      - name: genai-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: genai-db
+      - name: genai-auth
+      - name: genai-destination-service
+
+  - name: genai-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: genai-db
+
+  - name: genai-destinations
+    type: com.sap.application.content
+    requires:
+      - name: genai-auth
+        parameters:
+          service-key:
+            name: genai-auth-key
+      - name: genai-repo-host
+        parameters:
+          service-key:
+            name: genai-repo-host-key
+      - name: genai-api
+        parameters:
+          content-target: true
+      - name: genai-destination-service
+        parameters:
+          content-target: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: genai-srv
+              Authentication: OAuth2UserTokenExchange
+              TokenServiceInstanceName: genai-auth
+              TokenServiceKeyName: genai-auth-key
+              URL: "~{genai-api/srv-url}"
+              sap.cloud.service: genai
+            - Name: genai-repo-host
+              ServiceInstanceName: genai-repo-host
+              ServiceKeyName: genai-repo-host-key
+              sap.cloud.service: genai
+            - Name: genai-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: genai-auth
+              ServiceKeyName: genai-auth-key
+              sap.cloud.service: genai
+    build-parameters:
+      no-source: true
+
+  - name: templates
+    type: html5
+    path: app/templates
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+
+  - name: translations
+    type: html5
+    path: app/translations
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+
+  - name: genai-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: genai-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - templates.zip
+          name: templates
+          target-path: resources/
+        - artifacts:
+            - translations.zip
+          name: translations
+          target-path: resources/
+
+resources:
+  - name: genai-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: genai-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: genai-${org}-${space}
+        tenant-mode: dedicated
+
+  - name: genai-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: genai-destination-service
+      service-plan: lite
+
+  - name: genai-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host

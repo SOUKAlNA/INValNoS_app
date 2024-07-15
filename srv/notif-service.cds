@@ -1,12 +1,9 @@
 using { sap.ui.notification as db } from '../db/schema';
 
 @path: 'service/notification'
-service Notification {
+service Notification @(requires : 'authenticated-user'){
   @odata.draft.enabled
-  entity Contracts as projection on db.Contracts;
-	entity Components as projection on db.Components;
-  entity Translations as projection on db.Translations
-  actions{
+  entity Translations as projection on db.Translations actions{
     @cds.odata.bindingparameter.name : '_it'
     action translator(
                       @(UI.ParameterDefaultValue: _it.ID )

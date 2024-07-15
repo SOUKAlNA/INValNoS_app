@@ -22,27 +22,3 @@ using { managed, sap.common.CodeList } from '@sap/cds/common';
     content       : String @title : 'Template Content' @UI.MultiLineText;
     translations  : Association to many Translations on translations.template = $self;
   }
-
-// For Insurance Contracts App*
-  entity Contracts : managed {
-    key contractID : String @title : 'Insurance Contract / Policy'; /**Insurance Contract ID*/
-    insurerID      : String @title : 'ID Insurer';
-    insurer        : String @title : 'Name Insurer';
-    clientID       : String @title : 'ID Client';
-    client         : String @title : 'Name Client';
-    clientEmail    : String @title : 'E-mail Client' @Communication.IsEmailAddress;
-    status         : String @title : 'Status insurance contract';
-    components     : Composition of many Components on components.contract = $self @title : 'Contract Components';
-  }
-
-  entity Components : managed {
-    key component  : String @title : 'Contract Component';
-    contract       : Association to Contracts @title : 'Insurance Contract / Policy';
-    descr          : String @title : 'Description';
-    valueType      : String @title : 'Reporting Value Type';
-    provisional    : Integer @title : 'Reported Value Amount (provisional)';
-    final          : Integer @title : 'Reported Value Amount (final)';
-    reportStart    : Timestamp @title : 'Reporting Period - Start';
-    reportEnd      : Timestamp @title : 'Reporting Period - End';
-    finalReport    : Timestamp @title : 'Final Reporting Date';
-  }

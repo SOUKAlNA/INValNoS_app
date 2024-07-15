@@ -1,11 +1,26 @@
 {
   "_version": "1.59.0",
+  "sap.cloud": {
+    "public": true,
+    "service": "genai"
+  },
   "sap.app": {
     "id": "tp.templates",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
       "version": "0.0.1"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "templates-manage": {
+          "semanticObject": "templates",
+          "action": "manage",
+          "title": "{{appTitle}}",
+          "subTitle": "{{appDescription}}",
+          "icon": "sap-icon://documents"
+        }
+      }
     },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
