@@ -1,4 +1,4 @@
-# Getting Started
+# genai
 
 Welcome to your new project.
 
