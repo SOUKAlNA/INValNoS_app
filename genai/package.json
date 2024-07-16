@@ -27,6 +27,9 @@
     "watch-templates": "cds watch --open templates/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
+    "fiori": {
+      "bypass_draft": true
+    },
     "requires": {
       "auth": {
         "[development]": {
