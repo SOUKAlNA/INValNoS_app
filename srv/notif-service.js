@@ -4,7 +4,7 @@ const axios = require('axios');
 
 module.exports = cds.service.impl(function() {
 
-        const { Translations, Templates } = cds.entities
+        const { Translations, Templates } = this.entities
 
         this.on('editTemplate', async function onEditTemplate(req) {
 
@@ -25,7 +25,7 @@ module.exports = cds.service.impl(function() {
                 "messages": [
                     {
                         "role": "system",
-                        "content": `You are professional translator. Your task is to translate the content of the notification email template into business-level formal language. The target language has this code: ${translang}, and return ${subject} and ${content} with placeholders in text.`
+                        "content": `Insurance company wants to send an email to their insurance policy holders. Your task is to translate email template into business-level formal ${translang}. \n Subject: ${subject}. \n Return the subject and ${content} with placeholders.`
                     }
                 ],
                 "max_tokens": 500,
@@ -58,10 +58,11 @@ module.exports = cds.service.impl(function() {
                 const response = await axios.post('https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2/inference/deployments/d8321d6bf8269e7b/chat/completions?api-version=2023-05-15', 
                                                 payload, config); 
                 console.log(response.data.choices[0].message.content);
-                const result = response.data.choices[0].message.content
-                await UPDATE (Translations).set ({content: result}).where ({ID: ID})
+                const result = response.data.choices[0].message.content;
+                await UPDATE(Translations).set({content: result}).where ({ID: ID});
+                //return update
             } catch (error) {
-                return('Translation failed: ' + error.message);
+                return ('Translation failed: ' + error.message);
             }
         })
 

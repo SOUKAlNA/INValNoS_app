@@ -6,12 +6,12 @@ service Notification @(requires : 'authenticated-user'){
   entity Translations as projection on db.Translations actions{
     @cds.odata.bindingparameter.name : '_it'
     action translator(
-                      @(UI.ParameterDefaultValue: _it.ID )
+                      @(UI.ParameterDefaultValue: _it.ID, title: 'Email ID')
                       ID: String,
-                      @(UI.ParameterDefaultValue: _it.translang) 
-                      translang : String,
-                      @(UI.ParameterDefaultValue: _it.template_ID) 
+                      @(UI.ParameterDefaultValue: _it.template_ID, title: 'Template ID') 
                       template_ID : String,
+                      @(UI.ParameterDefaultValue: _it.translang.name, title: 'Translation Language')
+                      translang : String,
                     );
   };
   entity Templates as projection on db.Templates;

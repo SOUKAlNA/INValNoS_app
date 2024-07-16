@@ -1,5 +1,7 @@
-code,locale,name,descr
-en,en,English,English
-de,en,German,German
-en,de,English,English
-de,de,German,German
+code,locale,name
+en,en,English
+de,en,German
+ko,en,Korean
+tr,en,Turkish
+it,en,Italian
+zh_CH,en,Chinese(Simplified)

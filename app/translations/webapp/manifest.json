@@ -98,7 +98,7 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": { },
       "routes": [
         {
           "pattern": ":?query:",
@@ -124,9 +124,7 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "columns": {
-                    "DataField::ID": {
-                      "width": "20rem"
-                    }
+                    "DataField::ID": {"width": "15rem"}
                   },
                   "tableSettings": {
                     "type": "ResponsiveTable",
@@ -152,6 +150,17 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Translations",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#TranslateInformation": {
+                  "fields": {
+                    "DataField::template::content": {
+                      "formatOptions": {
+                        "textLinesEdit": "10"
+                      }
+                    }
+                  }
+                }
+              },
               "content": {
                 "body": {
                   "sections": {

@@ -22,15 +22,23 @@ annotate service.Templates with @(
         LineItem : [
             {
                 $Type : 'UI.DataField',
-                Value : ID
+                Value : ID,
+                ![@UI.Importance]: #High
             },
             {
                 $Type : 'UI.DataField',
-                Value : name
+                Value : name,
+                ![@UI.Importance]: #High
             },
             {
                 $Type : 'UI.DataField',
-                Value : lang_code
+                Value : lang_code,
+                ![@UI.Importance]: #High
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : modifiedAt,
+                ![@UI.Importance]: #High
             }
         ],
         FieldGroup #General : {

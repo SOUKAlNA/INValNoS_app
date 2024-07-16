@@ -8,24 +8,32 @@ annotate service.Translations with @(
 			Title         : {Value : template.name},
 			Description   : {Value : ID}
 		},
-		SelectionFields: [template.name, translang],
+		SelectionFields: [template.name, translang_code],
 		LineItem: [//items shown in the list
 			{
 				$Type : 'UI.DataField',
-				Value : ID
+				Value : ID,
+				![@UI.Importance]: #High
 			},
 			{
 				$Type : 'UI.DataField',
 				Label : 'Email Type',
 				Value : template_ID,
+				![@UI.Importance]: #High
 			},
 			{
 				$Type : 'UI.DataField',
-				Value : template.lang_code
+				Value : template.lang_code,
+				![@UI.Importance]: #High
 			},
 		    {
 		        $Type : 'UI.DataField',
-		        Value : translang,
+		        Value : translang_code,
+				![@UI.Importance]: #High
+		    },
+			{
+		        $Type : 'UI.DataField',
+		        Value : modifiedAt,
 				![@UI.Importance]: #High
 		    }
 		],
@@ -34,17 +42,19 @@ annotate service.Translations with @(
 			Data : [
 				{
 					$Type: 'UI.DataField',
+					Value: template.ID,
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: template.name,
+					![@Common.FieldControl] : #ReadOnly
+				},
+				{
+					$Type: 'UI.DataField',
 					Value: template.lang_code,
 					![@Common.FieldControl] : #ReadOnly /**all templates are in English */
 				},
-				{
-					$Type: 'UI.DataField',
-					Value: template.subject,
-				},
-				{
-					$Type: 'UI.DataField',
-					Value: template.content,
-				}
+				
 			]
 		},
 		Facets  : [
@@ -72,7 +82,15 @@ annotate service.Translations with @(
 			Data : [
 				{
 					$Type: 'UI.DataField',
-					Value: translang,
+					Value: template.subject,
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: template.content,
+				},
+				{
+					$Type: 'UI.DataField',
+					Value: translang_code,
 				},
 				{
 					$Type: 'UI.DataField',
@@ -80,7 +98,7 @@ annotate service.Translations with @(
 				},
 				{
 			        $Type : 'UI.DataFieldForAction',
-			        Label : 'Translator',
+			        Label : 'Translate',
 					Action : 'Notification.translator',
 			    },
 			]
@@ -89,7 +107,7 @@ annotate service.Translations with @(
 );
 
 annotate service.Translations with {
-    /**
+    
 	translang @(
 		Common : {
 			Text: translang.name,
@@ -111,7 +129,7 @@ annotate service.Translations with {
 				]
 			}
         }
-	);*/
+	);
 
 	template @(
 		Common : {

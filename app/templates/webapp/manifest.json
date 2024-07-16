@@ -129,6 +129,9 @@
               },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "DataField::modifiedAt": {"width": "20rem"}
+                  },
                   "tableSettings": {
                     "type": "ResponsiveTable",
                     "selectionMode": "Multi"
@@ -166,8 +169,7 @@
                   "fields": {
                     "DataField::subject": {
                       "formatOptions": {
-                        "textLinesEdit": "3",
-                        "textExpandBehaviorDisplay": "InPlace"
+                        "textLinesEdit": "3"
                       }
                     }
                   }

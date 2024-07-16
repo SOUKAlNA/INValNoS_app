@@ -1,5 +1,7 @@
-code,name,descr
-EN,English,English
-DE,German,German
-TR,Turkish,Turkish
-KO,Korean,Korean
+code,name
+en,English
+de,German
+tr,Turkish
+ko,Korean
+it,Italian
+zh_CH,Chinese(Simplified)
