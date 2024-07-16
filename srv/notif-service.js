@@ -14,18 +14,30 @@ module.exports = cds.service.impl(function() {
         
         })
 
+        this.on('updatePrompt', async function onUpdatePrompt(req) {
+
+            const { translation: ID } = req.data
+            
+            await UPDATE(Translations).set({prompt: req.string}).where({ID: ID})
+        
+        })
+
         this.on('translator', async function translatorEmail(req) {
 
-            const { ID, translang, template_ID } = req.data
-            const template = await SELECT.one.from(Templates).where({ID: template_ID})
-            const subject = template.subject;
-            const content = template.content;
+            const id = req.params[0].ID
+            const translation = await SELECT.one.from(Translations).where({ ID: id })
+            const template = await SELECT.one.from(Templates).where({ ID: translation.template_ID })
+            //const template = await SELECT.one.from(Templates).where({ID: template_ID})
+            const subject = template.subject
+            const content = template.content
+            const translang = translation.translang_code
+            const prompt = translation.prompt
     
             const payload = {
                 "messages": [
                     {
                         "role": "system",
-                        "content": `Insurance company wants to send an email to their insurance policy holders. Your task is to translate email template into business-level formal ${translang}. \n Subject: ${subject}. \n Return the subject and ${content} with placeholders.`
+                        "content": `You are professional translator. Your task is to translate the email template into business-level formal target language. The target language code is "${translang}" according to ISO 639. \n Return ${subject} and ${content} with placeholders. \n ${prompt}`
                     }
                 ],
                 "max_tokens": 500,
@@ -59,8 +71,8 @@ module.exports = cds.service.impl(function() {
                                                 payload, config); 
                 console.log(response.data.choices[0].message.content);
                 const result = response.data.choices[0].message.content;
-                await UPDATE(Translations).set({content: result}).where ({ID: ID});
-                //return update
+                await UPDATE(Translations).set({content: result}).where ({ID: id});
+                return result
             } catch (error) {
                 return ('Translation failed: ' + error.message);
             }

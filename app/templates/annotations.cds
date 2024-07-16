@@ -88,8 +88,12 @@ annotate service.Templates with {
 					{
                         $Type : 'Common.ValueListParameterInOut',
                         LocalDataProperty : lang_code,
-						ValueListProperty : 'name'
+						ValueListProperty : 'code'
                     },
+                    {
+						$Type : 'Common.ValueListParameterDisplayOnly',
+						ValueListProperty : 'name'
+					},
 				]
 			}
         }

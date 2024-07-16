@@ -124,7 +124,9 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "columns": {
-                    "DataField::ID": {"width": "15rem"}
+                    "DataField::ID": {"width": "15rem"},
+                    "DataField::template::lang_code": {"width": "10rem"},
+                    "DataField::translang_code": {"width": "10rem"}
                   },
                   "tableSettings": {
                     "type": "ResponsiveTable",
@@ -157,6 +159,15 @@
                       "formatOptions": {
                         "textLinesEdit": "10"
                       }
+                    }
+                  },
+                  "actions": {
+                    "translator": {
+                      "press": "ns.translations.ext.translator.translator.translate",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Translate"
                     }
                   }
                 }

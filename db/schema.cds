@@ -11,9 +11,10 @@ using { managed, sap.common.CodeList } from '@sap/cds/common';
     key ID      : String @title : 'Email ID';
     template    : Association to Templates @Core.Immutable @title : 'Template Information'; /**Core.Immutable - not editable in EditMode */
     //translang   : String @Core.Immutable @title : 'Translation Language';
-    translang   : Association to LanguageTypes @Core.Immutable @title : 'Translation Langugae';
+    translang   : Association to LanguageTypes @title : 'Translation Langugae';
     content     : String @title : 'Translation Content' @UI.MultiLineText;
     modifiedAt  : Timestamp @title : 'Update Date' @cds.on.update : $now;
+    prompt        : String @title : 'Additional Prompt Message' @UI.MultiLineText;
   }
 
   entity Templates : managed {

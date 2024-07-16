@@ -83,10 +83,12 @@ annotate service.Translations with @(
 				{
 					$Type: 'UI.DataField',
 					Value: template.subject,
+					![@Common.FieldControl] : #Inapplicable
 				},
 				{
 					$Type: 'UI.DataField',
 					Value: template.content,
+					![@Common.FieldControl] : #Inapplicable
 				},
 				{
 					$Type: 'UI.DataField',
@@ -94,13 +96,17 @@ annotate service.Translations with @(
 				},
 				{
 					$Type: 'UI.DataField',
-					Value: content,
+					Value: prompt,
 				},
 				{
+					$Type: 'UI.DataField',
+					Value: content,
+				},
+				/*{
 			        $Type : 'UI.DataFieldForAction',
 			        Label : 'Translate',
 					Action : 'Notification.translator',
-			    },
+			    },*/
 			]
 		},
 	},
